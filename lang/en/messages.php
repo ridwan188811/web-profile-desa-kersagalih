@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'beranda' => 'Home',
+    'kabar_desa' => 'Village News',
+    'tentang' => 'About',
+    'lembaga' => 'Institutions',
+    'pembangunan' => 'Development',
+    'layanan_online' => 'Online Services',
+    'selamat_datang' => 'WELCOME TO THE WEBSITE OF',
+    'nama_desa' => 'Kersagalih Village',
+    'deskripsi_hero' => 'Through this site, we provide actual village information as a manifestation of our commitment to public transparency.',
+    'profil_desa' => 'Village Profile',
+    'website_resmi' => 'Official Website of Kersagalih Village Government, Taraju District, Tasikmalaya Regency.',
+    'desa_anti_korupsi' => 'Anti-Corruption Village',
+    'tujuan_sasaran' => 'Goals and Objectives',
+    'visi_misi' => 'Vision and Mission',
+    'partisipasi_masyarakat' => 'Community Participation',
+    'program_link' => 'Programs & Links',
+    'kampung_kb' => 'Family Planning Village',
+    'inovasi_desa' => 'Village Innovation',
+    'kebijakan_privasi' => 'Privacy Policy',
+    'syarat_ketentuan' => 'Terms & Conditions',
+    'dikembangkan_oleh' => 'Developed by :',
+    'data_pembangunan' => 'Development Data',
+    'galeri' => 'Gallery',
+];
