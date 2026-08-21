@@ -20,10 +20,12 @@ return Application::configure(basePath: dirname(__DIR__))
             if (isset($_SERVER['VERCEL']) || getenv('VERCEL')) {
                 if ($e instanceof \ArgumentCountError && str_contains($e->getMessage(), 'createDriver')) {
                     $trace = $e->getTrace();
-                    $failingClass = isset($trace[0]['object']) ? get_class($trace[0]['object']) : 'Unknown';
+                    $failingClass = isset($trace[0]['class']) ? $trace[0]['class'] : 'Unknown';
                     echo "<h1>MANAGER CRASH DUMP</h1>";
                     echo "<pre>Failing Manager: " . $failingClass . "</pre>";
                     echo "<pre>Message: " . $e->getMessage() . "</pre>";
+                    echo "<h2>ENV DUMP:</h2>";
+                    echo "<pre>" . print_r($_ENV, true) . "</pre>";
                     exit;
                 }
             }
