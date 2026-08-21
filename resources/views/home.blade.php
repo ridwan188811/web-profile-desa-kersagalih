@@ -237,7 +237,7 @@
             @if($wisatas->count() > 0)
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     @foreach($wisatas as $index => $wisata)
-                        <a href="{{ route('tentang.wisata') }}" class="group relative rounded-2xl overflow-hidden aspect-[4/3] cursor-pointer block bg-slate-100 shadow-md hover:shadow-xl transition-all duration-300" x-data="{ shown: false }" x-intersect.once="shown = true" :class="shown ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'" style="transition: all 0.5s ease-out {{ ($index + 1) * 100 }}ms;">
+                        <a href="{{ route('tentang.wisata') }}" class="group relative rounded-2xl overflow-hidden cursor-pointer block bg-slate-100 shadow-md hover:shadow-xl transition-all duration-300" style="aspect-ratio: 4/3;">
                             @if($wisata->image)
                                 <img src="{{ asset('storage/' . $wisata->image) }}" alt="{{ $wisata->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
                             @else

@@ -39,7 +39,7 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/personils/bagan/{category}', [App\Http\Controllers\Admin\PersonilController::class, 'deleteBagan'])->name('admin.personils.delete_bagan');
     Route::resource('/admin/personils', App\Http\Controllers\Admin\PersonilController::class)->names('admin.personils');
     Route::resource('/admin/potensis', App\Http\Controllers\Admin\PotensiController::class)->names('admin.potensis');
-    Route::resource('/admin/wisata', App\Http\Controllers\Admin\WisataController::class)->names('admin.wisata');
+    Route::resource('/admin/wisata', App\Http\Controllers\Admin\WisataController::class)->names('admin.wisata')->parameters(['wisata' => 'wisata']);
     Route::resource('/admin/albums', App\Http\Controllers\Admin\AlbumController::class)->names('admin.albums');
     Route::post('/admin/albums/{album}/photos', [App\Http\Controllers\Admin\PhotoController::class, 'store'])->name('admin.photos.store');
     Route::delete('/admin/albums/{album}/photos/{photo}', [App\Http\Controllers\Admin\PhotoController::class, 'destroy'])->name('admin.photos.destroy');
