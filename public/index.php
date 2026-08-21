@@ -29,27 +29,23 @@ if (isset($_SERVER['VERCEL']) || getenv('VERCEL') || isset($_ENV['VERCEL'])) {
     $_ENV['APP_EVENTS_CACHE'] = '/tmp/storage/bootstrap/cache/events.php';
     $_ENV['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
     
-    // Remove any empty string environment variables injected by Vercel UI
-    // Empty strings cause Laravel Managers to crash when trying to resolve default drivers
-    foreach ($_SERVER as $key => $value) {
-        if ($value === "") {
-            unset($_SERVER[$key]);
-            putenv($key); // Unset putenv
-        }
-    }
-    foreach ($_ENV as $key => $value) {
-        if ($value === "") {
-            unset($_ENV[$key]);
-        }
-    }
+    $safeDrivers = [
+        'SESSION_DRIVER' => 'cookie',
+        'CACHE_STORE' => 'array',
+        'CACHE_DRIVER' => 'array',
+        'QUEUE_CONNECTION' => 'sync',
+        'LOG_CHANNEL' => 'errorlog',
+        'BROADCAST_CONNECTION' => 'log',
+        'FILESYSTEM_DISK' => 'local',
+        'MAIL_MAILER' => 'log',
+        'APP_DEBUG' => 'true'
+    ];
     
-    $_SERVER['SESSION_DRIVER'] = 'cookie';
-    $_ENV['SESSION_DRIVER'] = 'cookie';
-    putenv('SESSION_DRIVER=cookie');
-    
-    $_SERVER['APP_DEBUG'] = 'true';
-    $_ENV['APP_DEBUG'] = 'true';
-    putenv('APP_DEBUG=true');
+    foreach ($safeDrivers as $key => $value) {
+        $_SERVER[$key] = $value;
+        $_ENV[$key] = $value;
+        putenv("$key=$value");
+    }
     
     $directories = [
         '/tmp/storage/framework/views',
