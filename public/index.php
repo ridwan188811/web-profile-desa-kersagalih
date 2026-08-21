@@ -30,13 +30,20 @@ if (isset($_SERVER['VERCEL']) || getenv('VERCEL') || isset($_ENV['VERCEL'])) {
     $_ENV['VIEW_COMPILED_PATH'] = '/tmp/storage/framework/views';
     
     // Force safe drivers to prevent database driver crashing before migration
-    $_ENV['SESSION_DRIVER'] = 'cookie';
-    $_ENV['CACHE_STORE'] = 'array';
-    $_ENV['CACHE_DRIVER'] = 'array';
-    $_ENV['QUEUE_CONNECTION'] = 'sync';
-    $_ENV['APP_DEBUG'] = 'true';
-    putenv('SESSION_DRIVER=cookie');
-    putenv('CACHE_STORE=array');
+    $safeDrivers = [
+        'SESSION_DRIVER' => 'cookie',
+        'CACHE_STORE' => 'array',
+        'CACHE_DRIVER' => 'array',
+        'QUEUE_CONNECTION' => 'sync',
+        'LOG_CHANNEL' => 'errorlog',
+        'APP_DEBUG' => 'true'
+    ];
+    
+    foreach ($safeDrivers as $key => $value) {
+        $_SERVER[$key] = $value;
+        $_ENV[$key] = $value;
+        putenv("$key=$value");
+    }
     
     $directories = [
         '/tmp/storage/framework/views',
