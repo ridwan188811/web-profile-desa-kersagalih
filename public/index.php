@@ -34,4 +34,13 @@ if (isset($_SERVER['VERCEL']) || getenv('VERCEL') || isset($_ENV['VERCEL'])) {
     }
 }
 
-$app->handleRequest(Request::capture());
+try {
+    $app->handleRequest(Request::capture());
+} catch (\Throwable $e) {
+    http_response_code(500);
+    echo "<h1>FATAL ERROR:</h1>";
+    echo "<pre>Message: " . $e->getMessage() . "</pre>";
+    echo "<pre>File: " . $e->getFile() . " on line " . $e->getLine() . "</pre>";
+    echo "<h2>Trace:</h2>";
+    echo "<pre>" . $e->getTraceAsString() . "</pre>";
+}
