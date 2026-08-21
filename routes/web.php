@@ -45,4 +45,11 @@ Route::middleware(['auth'])->group(function () {
     Route::delete('/admin/albums/{album}/photos/{photo}', [App\Http\Controllers\Admin\PhotoController::class, 'destroy'])->name('admin.photos.destroy');
 
 });
-Route::get('/run-migrations', function () { \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]); return \Illuminate\Support\Facades\Artisan::output(); });
+Route::get('/run-migrations', function () {
+    try {
+        \Illuminate\Support\Facades\Artisan::call('migrate:fresh', ['--seed' => true, '--force' => true]);
+        return \Illuminate\Support\Facades\Artisan::output();
+    } catch (\Exception $e) {
+        return $e->getMessage();
+    }
+});
